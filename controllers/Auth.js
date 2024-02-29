@@ -33,31 +33,50 @@ const Login = async (req, res) => {
         email: user.email
       }
       let token = middleware.createToken(payload)
-      return res.send({user:payload,token})
+      return res.send({ user: payload, token })
     }
-    res.status(400).send({status:"Error",msg:"Unauthorized"})
+    res.status(400).send({ status: 'Error', msg: 'Unauthorized' })
   } catch (error) {
-    res.status(401).send({status:"Error",msg:"Anerror has occured"})
+    res.status(401).send({ status: 'Error', msg: 'Anerror has occured' })
   }
 }
 
-const updatePAssword = async (req,res)=>{
+const UpdatePassword = async (req, res) => {
   try {
-    const {oldPAssword,newPassword}=req.body
-    let user=await User.findById(req.params.user_id)
-    let matched = await middleware.comparePassword(user.passwordDigest,oldPAssword) 
-    if (matched){
+    const { oldPAssword, newPassword } = req.body
+    let user = await User.findById(req.params.user_id)
+    let matched = await middleware.comparePassword(
+      user.passwordDigest,
+      oldPAssword
+    )
+    if (matched) {
       let passwordDigest = await middleware.hashPassword(newPassword)
-      user = await User.findByIdAndUpdate(req.params.user_id,{passwordDigest})
-      let payload={
+      user = await User.findByIdAndUpdate(req.params.user_id, {
+        passwordDigest
+      })
+      let payload = {
         id: user.id,
-        email:user.email
+        email: user.email
       }
-      return res.send({status:"Password Updated!", user:payload})
+      return res.send({ status: 'Password Updated!', user: payload })
     }
-    res.status(401).send({status:"Error",msg:"Old Password did not match"})
+    res.status(401).send({ status: 'Error', msg: 'Old Password did not match' })
   } catch (error) {
-    res.status(401).send({ status: 'Error', msg: 'An error has occurred updating password!' })
-    
+    res.status(401).send({
+      status: 'Error',
+      msg: 'An error has occurred updating password!'
+    })
   }
+}
+
+const CheckSession = async (req, res) => {
+  const { payload } = res.locals
+  res.send(payload)
+}
+
+module.exports = {
+  Login,
+  Register,
+  UpdatePassword,
+  CheckSession
 }
