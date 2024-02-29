@@ -7,6 +7,9 @@ const methodOverride = require('method-override')
 
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
+const authRouter = require('./routes/AuthRouter')
+const artsRouter = require('./routes/arts')
+const collectionsRouter = require('./routes/collections')
 
 require('dotenv').config()
 require('./config/database')
@@ -26,6 +29,9 @@ app.use(methodOverride('_method'))
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
+app.use('/auth', authRouter)
+app.use('/arts', artsRouter)
+app.use('/collections', collectionsRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
