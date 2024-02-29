@@ -5,8 +5,8 @@ const collectionSchema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    userId: { Type: Schema.Types.ObjectId, ref: "User" },
-    artIds: [{ Type: Schema.Types.ObjectId, ref: "Art" }],
+    userId: { type: Schema.Types.ObjectId, ref: "User" },
+    artIds: [{ type: Schema.Types.ObjectId, ref: "Art" }],
   },
   {
     timestamps: true,

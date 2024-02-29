@@ -1,10 +1,10 @@
-const Collections = require('../models/collection')
-
+const Collections = require("../models/collection")
+const User = require("../models/user")
 const showCollections = async (req, res) => {
   try {
     const collectionId = await req.params.id
     const collection = await Collections.findById(collectionId).populate(
-      'artIds'
+      "artIds"
     )
     const collectionArt = await collection.artIds
     res.send(collectionArt)
@@ -16,8 +16,8 @@ const showCollections = async (req, res) => {
 const createCollection = async (req, res) => {
   try {
     const newCollection = await Collections.create(req.body)
-    const userId = await req.user._id
-    const currentUser = await findById(userId)
+    const userId = await req.body.userId
+    const currentUser = await User.findById(userId)
     currentUser.push(newCollection._id)
     await currentUser.save()
   } catch (error) {
@@ -36,5 +36,5 @@ const updateCollection = async (req, res) => {
 module.exports = {
   showCollections,
   createCollection,
-  updateCollection
+  updateCollection,
 }
