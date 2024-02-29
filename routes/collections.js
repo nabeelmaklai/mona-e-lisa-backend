@@ -3,7 +3,7 @@ const router = express.Router()
 collectionsCtrl = require('../controllers/Collections')
 
 router.post('/collections', collectionsCtrl.createCollection)
-router.get('/collections/:id', collectionsCtrl.show)
-router.put('/collections/:id', collectionsCtrl.update)
+router.get('/collections/:id', collectionsCtrl.showCollections)
+router.put('/collections/:id', collectionsCtrl.updateCollection)
 
 module.exports = router
