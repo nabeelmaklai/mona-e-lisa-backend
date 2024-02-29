@@ -3,6 +3,7 @@ const router = express.Router()
 artsCtrl = require('../controllers/arts')
 
 router.post('/arts', artsCtrl.createArt)
+router.post('/arts/:id/comments', artsCtrl.addComment)
 router.get('/arts/:id', artsCtrl.show)
 router.get('/arts', artsCtrl.index)
 
