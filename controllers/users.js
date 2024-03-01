@@ -1,14 +1,16 @@
 const User = require('../models/user')
 
 const show = async (req, res) => {
+  console.log('got to show in the controller')
   try {
-    const user = User.findById(req.params.id).populate([
+    const user = await User.findById(req.params.id).populate([
       'artIds',
       'collectionIds'
     ])
+    console.log(user)
     res.send(user)
   } catch (error) {
-    console.log(error)
+    console.log('Show error', error)
   }
 }
 

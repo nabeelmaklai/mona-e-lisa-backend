@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema(
@@ -7,11 +7,11 @@ const userSchema = new Schema(
     email: { type: String, required: true },
     passwordDigest: { type: String, required: true },
     bio: { type: String },
-    artIds: [{ type: Schema.Types.ObjectId, ref: "Art" }],
-    collectionIds: [{ type: Schema.Types.ObjectId, ref: "Collection" }],
+    artIds: [{ type: Schema.Types.ObjectId, ref: 'Art' }],
+    collectionIds: [{ type: Schema.Types.ObjectId, ref: 'Collection' }]
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 )
-module.exports = mongoose.model("User", userSchema)
+module.exports = mongoose.model('User', userSchema)

@@ -1,4 +1,4 @@
-const  User  = require('../models/user')
+const User = require('../models/user')
 const middleware = require('../middleware')
 
 const Register = async (req, res) => {
@@ -23,6 +23,7 @@ const Login = async (req, res) => {
   try {
     const { email, password } = req.body
     const user = await User.findOne({ email })
+
     let matched = await middleware.comparePassword(
       user.passwordDigest,
       password
@@ -30,14 +31,19 @@ const Login = async (req, res) => {
     if (matched) {
       let payload = {
         id: user._id,
-        email: user.email
+        email: user.email,
+        userName: user.name
       }
+
+
       let token = middleware.createToken(payload)
       return res.send({ user: payload, token })
     }
     res.status(400).send({ status: 'Error', msg: 'Unauthorized' })
+    console.log(error)
   } catch (error) {
-    res.status(401).send({ status: 'Error', msg: 'Anerror has occured' })
+    res.status(401).send({ status: 'Error', msg: 'An error has occured' })
+    console.log(error)
   }
 }
 
