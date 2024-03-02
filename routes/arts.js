@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-artsCtrl = require('../controllers/arts')
+const artsCtrl = require('../controllers/arts')
 
 router.post('/arts', artsCtrl.createArt)
 router.post('/arts/:id/comments', artsCtrl.addComment)

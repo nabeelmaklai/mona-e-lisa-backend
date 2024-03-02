@@ -15,7 +15,7 @@ const createArt = async (req, res) => {
 const show = async (req, res) => {
   try {
     const art = await Art.findById(req.params.id).populate([
-      'userID',
+      'userId',
       'commentIds'
     ])
     res.send(art)
@@ -26,7 +26,7 @@ const show = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const arts = await Art.find({}).populate(['userID', 'commentIds'])
+    const arts = await Art.find({}).populate(['userId', 'commentIds'])
     res.send(arts)
   } catch (error) {
     console.log(error)
