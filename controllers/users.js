@@ -7,7 +7,7 @@ const show = async (req, res) => {
       'artIds',
       'collectionIds'
     ])
-    console.log(user)
+
     res.send(user)
   } catch (error) {
     console.log('Show error', error)
