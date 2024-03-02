@@ -2,7 +2,7 @@ const Art = require('../models/art')
 const Comment = require('../models/comment')
 
 const createArt = async (req, res) => {
-  // console.log(req.params._id)
+  // console.log(req.body.userId)
   try {
     // const userId = req.params.id
     const post = await Art.create({ ...req.body })
