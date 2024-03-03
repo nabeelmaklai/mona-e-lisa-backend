@@ -1,11 +1,15 @@
 const Art = require('../models/art')
 const Comment = require('../models/comment')
+const User = require('../models/user')
 
 const createArt = async (req, res) => {
   // console.log(req.body.userId)
   try {
-    // const userId = req.params.id
+    const userId = await User.findById(req.body.userId)
     const post = await Art.create({ ...req.body })
+    console.log('This is the new art id', userId.artIds)
+    await userId.artIds.push(post._id)
+    await userId.save()
     res.send(post)
   } catch (error) {
     console.log(error)
