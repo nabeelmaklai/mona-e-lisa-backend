@@ -15,14 +15,15 @@ const showCollections = async (req, res) => {
 }
 
 const createCollection = async (req, res) => {
+  console.log(req.body.userId)
   try {
     const newCollection = await Collections.create(req.body)
     const userId = await req.body.userId
     const currentUser = await User.findById(userId)
-    currentUser.push(newCollection._id)
+    currentUser.collectionIds.push(newCollection._id)
     await currentUser.save()
   } catch (error) {
-    console.log('could not create collection')
+    console.log(error)
   }
 }
 
