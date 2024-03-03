@@ -10,4 +10,6 @@ router.get(
   usersCtrl.show
 )
 
+router.get('/:id/collections', usersCtrl.getCollections)
+
 module.exports = router
