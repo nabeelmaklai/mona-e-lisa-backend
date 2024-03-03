@@ -14,4 +14,13 @@ const show = async (req, res) => {
   }
 }
 
-module.exports = { show }
+const getCollections = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).populate('collectionIds')
+    res.send(user.collectionIds)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+module.exports = { show, getCollections }
