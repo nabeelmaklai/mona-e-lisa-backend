@@ -34,8 +34,20 @@ const updateCollection = async (req, res) => {
   }
 }
 
+const add = async (req, res) => {
+  try {
+    const collection = await Collections.findById(req.params.id)
+    collection.push(req.body.artId)
+    collection.save()
+    res.send(collection)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   showCollections,
   createCollection,
-  updateCollection
+  updateCollection,
+  add
 }
