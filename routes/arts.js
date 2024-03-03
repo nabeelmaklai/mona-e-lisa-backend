@@ -4,13 +4,13 @@ const artsCtrl = require('../controllers/arts')
 const middleware = require('../middleware')
 
 router.post(
-  '/arts',
+  '/',
   middleware.stripToken,
   middleware.verifyToken,
   artsCtrl.createArt
 )
-router.post('/arts/:id/comments', artsCtrl.addComment)
-router.get('/arts/:id', artsCtrl.show)
-router.get('/arts', artsCtrl.index)
+router.post('/:id/comments', artsCtrl.addComment)
+router.get('/:id', artsCtrl.show)
+router.get('/', artsCtrl.index)
 
 module.exports = router
