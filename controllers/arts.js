@@ -22,6 +22,9 @@ const show = async (req, res) => {
       'userId',
       'commentIds'
     ])
+    for (let i = 0; i < art.commentIds.length; i++) {
+      await art.commentIds[i].populate('userId')
+    }
     res.send(art)
   } catch (error) {
     console.log(error)
@@ -39,8 +42,9 @@ const index = async (req, res) => {
 
 const addComment = async (req, res) => {
   try {
-    const comment = Comment.create({ ...req.body })
-    const art = Art.findById(req.params.id)
+    const comment = new Comment({ ...req.body })
+    comment.save()
+    const art = await Art.findById(req.params.id)
     art.commentIds.push(comment._id)
     art.save()
     res.send(art)
