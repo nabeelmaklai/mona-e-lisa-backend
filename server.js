@@ -32,7 +32,7 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
 app.use('/arts', artsRouter)
-app.use('/', collectionsRouter)
+app.use('/collections', collectionsRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
