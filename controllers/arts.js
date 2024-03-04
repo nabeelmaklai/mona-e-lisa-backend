@@ -71,4 +71,15 @@ const deleteComment = async (req, res) => {
   }
 }
 
-module.exports = { createArt, show, index, addComment, deleteComment }
+const like = async (req, res) => {
+  try {
+    const art = await Art.findById(req.params.id)
+    art.likes.push(req.body.userId)
+    art.save()
+    res.send(art)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+module.exports = { createArt, show, index, addComment, deleteComment, like }
