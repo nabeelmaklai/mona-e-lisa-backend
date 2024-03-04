@@ -23,4 +23,15 @@ const getCollections = async (req, res) => {
   }
 }
 
-module.exports = { show, getCollections }
+const follow = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+    user.following.push(req.body.userId)
+    user.save()
+    res.send(user)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+module.exports = { show, getCollections, follow }
