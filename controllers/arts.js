@@ -82,4 +82,28 @@ const like = async (req, res) => {
   }
 }
 
-module.exports = { createArt, show, index, addComment, deleteComment, like }
+const removeLlike = async (req, res) => {
+  try {
+    await Art.updateOne(
+      { _id: req.params.id },
+      {
+        $pull: {
+          likes: req.body.userId
+        }
+      }
+    )
+    res.send('')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+module.exports = {
+  createArt,
+  show,
+  index,
+  addComment,
+  deleteComment,
+  like,
+  removeLlike
+}
