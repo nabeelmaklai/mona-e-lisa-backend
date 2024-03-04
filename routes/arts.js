@@ -12,5 +12,6 @@ router.post(
 router.post('/:id/comments', artsCtrl.addComment)
 router.get('/:id', artsCtrl.show)
 router.get('/', artsCtrl.index)
+router.delete('/:id/comments/:commentId', artsCtrl.deleteComment)
 
 module.exports = router
