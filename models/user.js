@@ -8,7 +8,8 @@ const userSchema = new Schema(
     passwordDigest: { type: String, required: true },
     bio: { type: String },
     artIds: [{ type: Schema.Types.ObjectId, ref: 'Art' }],
-    collectionIds: [{ type: Schema.Types.ObjectId, ref: 'Collection' }]
+    collectionIds: [{ type: Schema.Types.ObjectId, ref: 'Collection' }],
+    following: [{ type: Schema.Types.ObjectId, ref: 'User' }]
   },
   {
     timestamps: true
