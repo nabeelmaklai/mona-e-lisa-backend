@@ -34,4 +34,20 @@ const follow = async (req, res) => {
   }
 }
 
-module.exports = { show, getCollections, follow }
+const unfollow = async (req, res) => {
+  try {
+    await User.updateOne(
+      { _id: req.params.id },
+      {
+        $pull: {
+          following: req.body.userId
+        }
+      }
+    )
+    res.send('Unfollowed')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+module.exports = { show, getCollections, follow, unfollow }
