@@ -11,6 +11,8 @@ router.post(
 )
 router.post('/:id/comments', artsCtrl.addComment)
 router.get('/:id', artsCtrl.show)
+router.put('/:id', artsCtrl.EditArtDetails)
+
 router.get('/', artsCtrl.index)
 router.delete('/:id/comments/:commentId', artsCtrl.deleteComment)
 router.put('/:id/like', artsCtrl.like)
