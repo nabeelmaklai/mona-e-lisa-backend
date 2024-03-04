@@ -11,5 +11,6 @@ router.get(
 )
 
 router.get('/:id/collections', usersCtrl.getCollections)
+router.put('/:id/follow', usersCtrl.follow)
 
 module.exports = router
