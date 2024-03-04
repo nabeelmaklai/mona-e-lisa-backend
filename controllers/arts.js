@@ -52,5 +52,23 @@ const addComment = async (req, res) => {
     console.log(error)
   }
 }
+const deleteComment = async (req, res) => {
+  console.log('Art ID', req.params.id)
+  console.log('comment ID', req.params.commentId)
+  // console.log('Done', req.body.data)
 
-module.exports = { createArt, show, index, addComment }
+  try {
+    const artId = await Art.findById(req.params.id)
+    await Art.findByIdAndUpdate(
+      artId,
+      { $pull: { commentIds: req.params.commentId } },
+      { new: true }
+    )
+    await Comment.findOneAndDelete({ _id: req.params.commentId })
+    console.log('deleted')
+  } catch (error) {
+    console.log('error in delete comment controller', error)
+  }
+}
+
+module.exports = { createArt, show, index, addComment, deleteComment }
