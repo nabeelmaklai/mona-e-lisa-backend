@@ -97,6 +97,14 @@ const removeLlike = async (req, res) => {
     console.log(error)
   }
 }
+const EditArtDetails = async (req, res) => {
+  try {
+    const artId = await Art.findById(req.params.id)
+    await Art.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    await Art.save()
+    res.send('')
+  } catch (error) {}
+}
 
 module.exports = {
   createArt,
@@ -105,5 +113,6 @@ module.exports = {
   addComment,
   deleteComment,
   like,
-  removeLlike
+  removeLlike,
+  EditArtDetails
 }
