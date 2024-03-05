@@ -20,11 +20,20 @@ const show = async (req, res) => {
   try {
     const art = await Art.findById(req.params.id).populate([
       'userId',
-      'commentIds'
+      {
+        path: 'commentIds',
+        populate: [{ path: 'replies', populate: 'user' }, 'userId']
+      }
     ])
-    for (let i = 0; i < art.commentIds.length; i++) {
-      await art.commentIds[i].populate('userId')
-    }
+
+    // for (let i = 0; i < art.commentIds.length; i++) {
+    //   await art.commentIds[i].populate('userId')
+    //   if (art.commentIds[i].replies.length) {
+    //     for (let j = 0; j < art.commentIds[i].replies.length; j++) {
+    //       await art.commentIds[i].populate()
+    //     }
+    //   }
+    // }
     res.send(art)
   } catch (error) {
     console.log(error)
