@@ -6,7 +6,8 @@ const show = async (req, res) => {
     const user = await User.findById(req.params.id).populate([
       'artIds',
       'collectionIds',
-      'following'
+      'following',
+      'collectionIds.artIds'
     ])
     res.send(user)
   } catch (error) {
