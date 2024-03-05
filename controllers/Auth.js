@@ -22,7 +22,7 @@ const Register = async (req, res) => {
 const Login = async (req, res) => {
   try {
     const { email, password } = req.body
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email }).populate('following')
     let matched = await middleware.comparePassword(
       user.passwordDigest,
       password
