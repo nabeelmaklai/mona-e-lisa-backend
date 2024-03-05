@@ -8,7 +8,7 @@ const showCollections = async (req, res) => {
       'artIds'
     )
     const collectionArt = await collection.artIds
-    res.send(collectionArt)
+    res.send(collection)
   } catch (error) {
     console.log('could not show collection')
   }
