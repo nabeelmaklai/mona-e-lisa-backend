@@ -98,13 +98,11 @@ const removeLlike = async (req, res) => {
   }
 }
 const EditArtDetails = async (req, res) => {
-  console.log('This is the EditArtDetails', req.body)
-  console.log('This is the art Id', req.params.id)
-
   try {
     const artId = await Art.findById(req.params.id)
     await Art.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     await Art.save()
+    res.send('')
   } catch (error) {}
 }
 
