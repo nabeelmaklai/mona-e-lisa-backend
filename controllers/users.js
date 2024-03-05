@@ -5,8 +5,10 @@ const show = async (req, res) => {
   try {
     const user = await User.findById(req.params.id).populate([
       'artIds',
-      'collectionIds'
+      'collectionIds',
     ])
+    await user.populate("collectionIds.artIds")
+
 
     res.send(user)
   } catch (error) {
