@@ -50,4 +50,17 @@ const unfollow = async (req, res) => {
   }
 }
 
-module.exports = { show, getCollections, follow, unfollow }
+const getFollowing = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).populate('following')
+    const following = user.following.map((user) => ({
+      _id: user._id,
+      name: user.name
+    }))
+    res.send(following)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+module.exports = { show, getCollections, follow, unfollow, getFollowing }
