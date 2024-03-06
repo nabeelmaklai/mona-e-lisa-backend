@@ -50,4 +50,13 @@ const unfollow = async (req, res) => {
   }
 }
 
-module.exports = { show, getCollections, follow, unfollow }
+const editBio =async (req,res)=>{
+  try {
+    const update = await User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    res.send(update)
+  } catch (error) {
+    
+  }
+}
+
+module.exports = { show, getCollections, follow, unfollow,editBio }
