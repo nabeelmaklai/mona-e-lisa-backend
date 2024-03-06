@@ -25,15 +25,6 @@ const show = async (req, res) => {
         populate: [{ path: 'replies', populate: 'user' }, 'userId']
       }
     ])
-
-    // for (let i = 0; i < art.commentIds.length; i++) {
-    //   await art.commentIds[i].populate('userId')
-    //   if (art.commentIds[i].replies.length) {
-    //     for (let j = 0; j < art.commentIds[i].replies.length; j++) {
-    //       await art.commentIds[i].populate()
-    //     }
-    //   }
-    // }
     res.send(art)
   } catch (error) {
     console.log(error)
@@ -75,6 +66,7 @@ const deleteComment = async (req, res) => {
     )
     await Comment.findOneAndDelete({ _id: req.params.commentId })
     console.log('deleted')
+    res.send(artId)
   } catch (error) {
     console.log('error in delete comment controller', error)
   }
