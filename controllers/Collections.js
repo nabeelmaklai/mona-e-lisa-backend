@@ -62,10 +62,29 @@ const remove = async (req, res) => {
   }
 }
 
+const deleteCollection = async (req, res) => {
+  try {
+    const collection = await Collections.findById(req.params.id)
+    await User.updateOne(
+      { _id: collection.userId },
+      {
+        $pull: {
+          collectionIds: req.params.id
+        }
+      }
+    )
+    await Collections.findByIdAndDelete(req.params.id)
+    res.send('deleted')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   showCollections,
   createCollection,
   updateCollection,
   add,
-  remove
+  remove,
+  delete: deleteCollection
 }
