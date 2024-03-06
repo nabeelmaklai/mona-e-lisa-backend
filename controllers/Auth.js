@@ -71,7 +71,6 @@ const UpdatePassword = async (req, res) => {
 }
 
 const CheckSession = async (req, res) => {
-  const user = await User.findOne({ email }).populate('following')
   const { payload } = res.locals
   res.send(payload)
 }

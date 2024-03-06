@@ -48,11 +48,11 @@ const add = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    await Art.updateOne(
+    await Collections.updateOne(
       { _id: req.params.id },
       {
         $pull: {
-          likes: req.body.artId
+          artIds: req.body.artId
         }
       }
     )
