@@ -46,9 +46,45 @@ const add = async (req, res) => {
   }
 }
 
+const remove = async (req, res) => {
+  try {
+    await Collections.updateOne(
+      { _id: req.params.id },
+      {
+        $pull: {
+          artIds: req.body.artId
+        }
+      }
+    )
+    res.send('removed')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const deleteCollection = async (req, res) => {
+  try {
+    const collection = await Collections.findById(req.params.id)
+    await User.updateOne(
+      { _id: collection.userId },
+      {
+        $pull: {
+          collectionIds: req.params.id
+        }
+      }
+    )
+    await Collections.findByIdAndDelete(req.params.id)
+    res.send('deleted')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   showCollections,
   createCollection,
   updateCollection,
-  add
+  add,
+  remove,
+  delete: deleteCollection
 }
