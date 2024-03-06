@@ -6,5 +6,6 @@ router.post('/', collectionsCtrl.createCollection)
 router.get('/:id', collectionsCtrl.showCollections)
 router.put('/:id', collectionsCtrl.updateCollection)
 router.put('/:id/add', collectionsCtrl.add)
+router.put('/:id/remove', collectionsCtrl.remove)
 
 module.exports = router

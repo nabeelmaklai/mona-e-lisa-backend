@@ -46,9 +46,26 @@ const add = async (req, res) => {
   }
 }
 
+const remove = async (req, res) => {
+  try {
+    await Art.updateOne(
+      { _id: req.params.id },
+      {
+        $pull: {
+          likes: req.body.artId
+        }
+      }
+    )
+    res.send('removed')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   showCollections,
   createCollection,
   updateCollection,
-  add
+  add,
+  remove
 }
