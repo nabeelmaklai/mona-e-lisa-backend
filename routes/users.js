@@ -4,6 +4,8 @@ const usersCtrl = require('../controllers/users')
 const middleware = require('../middleware')
 
 router.get('/:id', usersCtrl.show)
+router.put('/:id', usersCtrl.editBio)
+
 
 router.get('/:id/collections', usersCtrl.getCollections)
 router.put('/:id/follow', usersCtrl.follow)
