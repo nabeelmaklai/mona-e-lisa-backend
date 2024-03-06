@@ -5,13 +5,13 @@ const Register = async (req, res) => {
   try {
     const { email, name, password } = req.body
     let passwordDigest = await middleware.hashPassword(password)
-    let existingUser = await Users.findOne({ email })
+    let existingUser = await User.findOne({ email })
     if (existingUser) {
       return res
         .status(400)
         .send('A user with the email has already been registered')
     } else {
-      const user = await Users.create({ email, passwordDigest, name })
+      const user = await User.create({ email, passwordDigest, name })
       res.send(user)
     }
   } catch (error) {
@@ -30,11 +30,13 @@ const Login = async (req, res) => {
     if (matched) {
       let payload = {
         id: user._id,
-        email: user.email,
-        following: user.following
+        email: user.email
       }
       let token = middleware.createToken(payload)
-      return res.send({ user: payload, token })
+      return res.send({
+        user: { ...payload, following: user.following },
+        token
+      })
     }
     res.status(400).send({ status: 'Error', msg: 'Unauthorized' })
   } catch (error) {
