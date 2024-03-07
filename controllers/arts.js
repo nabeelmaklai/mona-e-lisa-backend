@@ -103,8 +103,10 @@ const EditArtDetails = async (req, res) => {
     const artId = await Art.findById(req.params.id)
     await Art.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     await Art.save()
-    res.send('')
-  } catch (error) {}
+    res.send(true)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = {
