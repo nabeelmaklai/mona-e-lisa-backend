@@ -3,11 +3,9 @@ const Comment = require('../models/comment')
 const User = require('../models/user')
 
 const createArt = async (req, res) => {
-  // console.log(req.body.userId)
   try {
     const userId = await User.findById(req.body.userId)
     const post = await Art.create({ ...req.body })
-    console.log('This is the new art id', userId.artIds)
     await userId.artIds.push(post._id)
     await userId.save()
     res.send(post)
@@ -53,10 +51,6 @@ const addComment = async (req, res) => {
   }
 }
 const deleteComment = async (req, res) => {
-  console.log('Art ID', req.params.id)
-  console.log('comment ID', req.params.commentId)
-  // console.log('Done', req.body.data)
-
   try {
     const artId = await Art.findById(req.params.id)
     await Art.findByIdAndUpdate(
@@ -65,7 +59,6 @@ const deleteComment = async (req, res) => {
       { new: true }
     )
     await Comment.findOneAndDelete({ _id: req.params.commentId })
-    console.log('deleted')
     res.send(artId)
   } catch (error) {
     console.log('error in delete comment controller', error)
@@ -100,7 +93,6 @@ const removeLlike = async (req, res) => {
 }
 const EditArtDetails = async (req, res) => {
   try {
-    const artId = await Art.findById(req.params.id)
     await Art.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     await Art.save()
     res.send(true)

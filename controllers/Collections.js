@@ -7,7 +7,6 @@ const showCollections = async (req, res) => {
     const collection = await Collections.findById(collectionId).populate(
       'artIds'
     )
-    const collectionArt = await collection.artIds
     res.send(collection)
   } catch (error) {
     console.log('could not show collection')
@@ -15,7 +14,6 @@ const showCollections = async (req, res) => {
 }
 
 const createCollection = async (req, res) => {
-  console.log(req.body.userId)
   try {
     const newCollection = await Collections.create(req.body)
     const userId = await req.body.userId
