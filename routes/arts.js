@@ -11,10 +11,20 @@ router.post(
 )
 router.post('/:id/comments', artsCtrl.addComment)
 router.get('/:id', artsCtrl.show)
-router.put('/:id', artsCtrl.EditArtDetails)
+router.put(
+  '/:id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  artsCtrl.EditArtDetails
+)
 
 router.get('/', artsCtrl.index)
-router.delete('/:id/comments/:commentId', artsCtrl.deleteComment)
+router.delete(
+  '/:id/comments/:commentId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  artsCtrl.deleteComment
+)
 router.put(
   '/:id/like',
   middleware.stripToken,
