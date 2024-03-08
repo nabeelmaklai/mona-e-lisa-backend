@@ -51,17 +51,15 @@ const unfollow = async (req, res) => {
 }
 
 const editBio = async (req, res) => {
-  // console.log('Got to the edit bio page')
   try {
     const update = await User.findOneAndUpdate(
       { _id: req.params.id },
       req.body,
       { new: true }
     )
- 
     res.send(update)
   } catch (error) {
-    res.status(500).json({msg: "error"})
+    res.status(500).json({ msg: 'error' })
   }
 }
 
