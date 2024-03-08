@@ -15,7 +15,17 @@ router.put('/:id', artsCtrl.EditArtDetails)
 
 router.get('/', artsCtrl.index)
 router.delete('/:id/comments/:commentId', artsCtrl.deleteComment)
-router.put('/:id/like', artsCtrl.like)
-router.put('/:id/removelike', artsCtrl.removeLlike)
+router.put(
+  '/:id/like',
+  middleware.stripToken,
+  middleware.verifyToken,
+  artsCtrl.like
+)
+router.put(
+  '/:id/removelike',
+  middleware.stripToken,
+  middleware.verifyToken,
+  artsCtrl.removeLlike
+)
 
 module.exports = router
