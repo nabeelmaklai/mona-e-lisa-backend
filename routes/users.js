@@ -4,12 +4,26 @@ const usersCtrl = require('../controllers/users')
 const middleware = require('../middleware')
 
 router.get('/:id', usersCtrl.show)
-router.put('/:id', usersCtrl.editBio)
-
+router.put(
+  '/:id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  usersCtrl.editBio
+)
 
 router.get('/:id/collections', usersCtrl.getCollections)
-router.put('/:id/follow', usersCtrl.follow)
-router.put('/:id/unfollow', usersCtrl.unfollow)
+router.put(
+  '/:id/follow',
+  middleware.stripToken,
+  middleware.verifyToken,
+  usersCtrl.follow
+)
+router.put(
+  '/:id/unfollow',
+  middleware.stripToken,
+  middleware.verifyToken,
+  usersCtrl.unfollow
+)
 router.get('/:id/following', usersCtrl.getFollowing)
 
 module.exports = router
